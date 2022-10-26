@@ -1,16 +1,17 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap");
 body {
   height: 100vh;
-  width: 100vw;
+  width: calc(100vw - 300px);
   margin: 0;
   background-color: #ffd3cf;
-  display: grid;
-  grid-template-columns: 0.25fr 1fr;
 }
 body #navigation {
+  position: fixed;
   background-color: #191919;
   height: 100%;
+  width: 300px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -32,21 +33,23 @@ body #navigation .nav__link {
 body #navigation .nav__link:focus {
   box-shadow: inset 0px 0px 25px 5px #191919;
 }
-body #navigation .active__link {
-  box-shadow: inset 0px 0px 25px 5px #888888;
+body #display {
+  margin-left: 300px;
+  width: 100%;
+  height: 100%;
 }
-body #display #menu {
+body #display #category__menu {
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-body #display #menu #menu_header {
+body #display #category__menu #category_header {
   font-family: "Montserrat", sans-serif;
   font-size: 2rem;
 }
-body #display #menu #cards {
+body #display #category__menu #cards {
   width: 100%;
   height: 70%;
   display: flex;
@@ -54,7 +57,7 @@ body #display #menu #cards {
   justify-content: space-evenly;
   align-items: center;
 }
-body #display #menu #cards .card_menu {
+body #display #category__menu #cards .card_category {
   width: 30%;
   height: 50%;
   border: 10px solid #191919;
@@ -68,32 +71,240 @@ body #display #menu #cards .card_menu {
   cursor: pointer;
   transition: all 500ms;
 }
-body #display #menu #cards .card_menu .card__header {
+body #display #category__menu #cards .card_category .card__header {
   width: 100%;
   text-align: center;
   color: #ffd3cf;
   font-family: "Josefin Sans", sans-serif;
 }
-body #display #menu #cards .card_menu .card__img {
+body #display #category__menu #cards .card_category .card__img {
   width: 100%;
+  height: 200px;
   display: flex;
   justify-content: center;
+  border-radius: 10px;
 }
-body #display #menu #cards .card_menu:hover {
+body #display #category__menu #cards .card_category:hover {
   background-color: #ffd3cf;
   transform: translate(0px, -20px);
   box-shadow: 15px 15px 20px 5px #191919;
+  border-color: #ffd3cf;
 }
-body #display #menu #cards .card_menu:hover .card__header {
+body #display #category__menu #cards .card_category:hover .card__header {
   color: #191919;
 }
-body #display #menu #cards .card_menu:hover .card__img {
+body #display #category__menu #cards .card_category:hover .card__img {
   fill: #191919;
 }
-body #display #food__menu {
+body #display #category__menu #cards .card_category:active {
+  box-shadow: inset 10px 10px 20px 5px #191919;
+}
+body #display #menu {
+  height: 100%;
+  width: 100%;
+  display: inline-block;
+}
+body #display #menu #menu__header {
+  text-align: center;
+  font-family: "Montserrat", sans-serif;
+}
+body #display #menu #cards {
+  width: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  min-height: 80%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 10px 0px;
+  border-bottom: 3px solid #191919;
+}
+body #display #menu #cards .menu__card {
+  width: 30%;
+  height: 50%;
+  border: 10px solid #191919;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #191919;
+  border-radius: 40px;
+  box-shadow: 12px 12px 20px 2px #888888;
+  cursor: pointer;
+  transition: all 500ms;
+  margin: 5px;
+}
+body #display #menu #cards .menu__card .card__header {
+  width: 100%;
+  text-align: center;
+  color: #ffd3cf;
+  font-family: "Josefin Sans", sans-serif;
+}
+body #display #menu #cards .menu__card .card__img {
+  width: 40%;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  border-radius: 10px;
+}
+body #display #menu #cards .menu__card:hover {
+  background-color: #ffd3cf;
+  transform: translate(0px, -20px);
+  box-shadow: 15px 15px 20px 5px #191919;
+  border-color: #ffd3cf;
+}
+body #display #menu #cards .menu__card:hover .card__header {
+  color: #191919;
+}
+body #display #menu #cards .menu__card:hover .card__img {
+  fill: #191919;
+}
+body #display #menu #cards .menu__card:active {
+  box-shadow: inset 10px 10px 20px 5px #191919;
+}
+body #display #menu .order_check {
+  width: 100%;
+  margin: 20px 0px 0px;
+  display: flex;
+  justify-content: center;
+}
+body #display #menu .order_check .check_btn {
+  background-color: #191919;
+  width: 200px;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  color: #ffd3cf;
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 1.3rem;
+  padding: 5px 0px;
+  border-radius: 10px;
+}
+body #display #order {
+  width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
+  justify-content: space-evenly;
   align-items: center;
-  background-color: aqua;
+}
+body #display #order #order_header {
+  font-family: "Montserrat", sans-serif;
+}
+body #display #order #list_of_items {
+  list-style: none;
+  border: 3px solid #191919;
+  border-radius: 20px;
+  box-shadow: 0px 0px 20px 5px #191919;
+  margin: 20px;
+  display: inline;
+}
+body #display #order #list_of_items .order_items {
+  font-family: "Nanum Gothic Coding", monospace;
+  font-size: 1.1rem;
+  margin: 20px;
+  border-bottom: 0.5px solid #191919;
+}
+body #display #order #list_of_items .order_items .item_name {
+  font-family: "Josefin Sans", sans-serif;
+}
+body #display #order #list_of_items .order_items .item_price {
+  font-family: "Josefin Sans", sans-serif;
+}
+body #display #order #list_of_items .order_items .remove_item {
+  color: #888888;
+  text-decoration: underline;
+  font-size: 0.7rem;
+  cursor: pointer;
+}
+body #display #order #list_of_items .order_items:last-child {
+  display: flex;
+  justify-content: space-between;
+}
+body #display #order #order_action {
+  width: 50%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+body #display #order #order_action > * {
+  background-color: #191919;
+  width: 30%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  color: #ffd3cf;
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 1.1rem;
+  padding: 5px 0px;
+  border-radius: 10px;
+}
+body #display #empty_invoice {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+body #display #empty_invoice > h1 {
+  font-family: "Montserrat", sans-serif;
+}
+body #display #invoice {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  min-height: 100%;
+}
+body #display #invoice #order_invoice_display {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+body #display #invoice #order_invoice_display .single_order {
+  border: 2px solid #191919;
+  border-radius: 10px;
+  width: 20%;
+  margin: 10px;
+  padding: 10px;
+  background-color: #191919;
+  color: #ffd3cf;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+body #display #invoice #order_invoice_display .single_order > h5 {
+  text-align: center;
+  font-family: "Josefin Sans", sans-serif;
+}
+body #display #invoice #order_invoice_display .single_order .order_details {
+  font-size: 0.8rem;
+  font-family: "Nanum Gothic Coding", monospace;
+}
+body #display #invoice #order_invoice_display .single_order .order_details > ul {
+  list-style: none;
+}
+body #display #invoice #order_invoice_display .single_order .order_price {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  border-top: 1px solid #ffd3cf;
+  font-family: "Josefin Sans", sans-serif;
+  padding-top: 5px;
+}
+body #display #invoice #full_income {
+  width: 50%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  font-family: "Josefin Sans", sans-serif;
+  border: 0px solid #191919;
+  border-width: 3px 3px 0px 3px;
+  padding: 5px;
 }/*# sourceMappingURL=index.css.map */

@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap");
 
 //variables
 $first-color: #ffd3cf;
@@ -8,9 +9,20 @@ $third-color: #f0f3f4;
 $shadow-color: #888888;
 $first-font: "Montserrat", sans-serif;
 $second-font: "Josefin Sans", sans-serif;
+$third-font: "Nanum Gothic Coding", monospace;
 
 //mixins
-@mixin card {
+@mixin btn($font-size_p, $width_p) {
+  background-color: $second-color;
+  width: $width_p;
+  height: fit-content;
+  color: $first-color;
+  font-family: $second-font;
+  font-size: $font-size_p;
+  padding: 5px 0px;
+  border-radius: 10px;
+}
+@mixin card($img_width_p: 100%) {
   width: 30%;
   height: 50%;
   border: 10px solid $second-color;
@@ -32,15 +44,18 @@ $second-font: "Josefin Sans", sans-serif;
   }
 
   .card__img {
-    width: 100%;
+    width: $img_width_p;
+    height: 200px;
     display: flex;
     justify-content: center;
+    border-radius: 10px;
   }
 
   &:hover {
     background-color: $first-color;
     transform: translate(0px, -20px);
     box-shadow: 15px 15px 20px 5px $second-color;
+    border-color: $first-color;
 
     .card__header {
       color: $second-color;
@@ -50,20 +65,27 @@ $second-font: "Josefin Sans", sans-serif;
       fill: $second-color;
     }
   }
+
+  &:active {
+    box-shadow: inset 10px 10px 20px 5px $second-color;
+  }
 }
 
+@mixin clicked {
+  
+}
 //styling
 body {
   height: 100vh;
-  width: 100vw;
+  width: calc(100vw - 300px);
   margin: 0;
   background-color: $first-color;
-  display: grid;
-  grid-template-columns: 0.25fr 1fr;
 
   #navigation {
+    position: fixed;
     background-color: $second-color;
     height: 100%;
+    width: 300px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -86,20 +108,20 @@ body {
         box-shadow: inset 0px 0px 25px 5px $second-color;
       }
     }
+  }//end of navigation display
 
-    .active__link {
-      box-shadow: inset 0px 0px 25px 5px $shadow-color;
-    }
-  }
   #display {
-    #menu {
+    margin-left: 300px;
+    width: 100%;
+    height: 100%;
+    #category__menu {
       width: 100%;
       height: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
 
-      #menu_header {
+      #category_header {
         font-family: $first-font;
         font-size: 2rem;
       }
@@ -110,19 +132,182 @@ body {
         flex-direction: row;
         justify-content: space-evenly;
         align-items: center;
-        .card_menu {
+        .card_category {
           @include card();
         }
       }
-    }//end of regular menu styling
-    
-    #food__menu{
+    } //end of regular menu styling
+
+    #menu {
+      height: 100%;
+      width: 100%;
+      display: inline-block;
+
+      #menu__header {
+        text-align: center;
+        font-family: $first-font;
+      }
+
+      #cards {
+        width: 100%;
+        height: fit-content;
+        min-height: 80%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+        flex-wrap: wrap;
+        padding: 10px 0px;
+        border-bottom: 3px solid $second-color;
+
+        .menu__card {
+          @include card(40%);
+          margin: 5px;
+        }
+      }
+
+      .order_check {
+        width: 100%;
+        margin: 20px 0px 0px;
+        display: flex;
+        justify-content: center;
+
+        .check_btn {
+          @include btn(1.3rem, 200px);
+        }
+      }
+    }
+
+    #order {
+      width: 100%;
       height: 100%;
       display: flex;
       flex-direction: column;
+      justify-content: space-evenly;
       align-items: center;
-      background-color: aqua;
+
+      #order_header {
+        font-family: $first-font;
+      }
+
+      #list_of_items {
+        list-style: none;
+        border: 3px solid $second-color;
+        border-radius: 20px;
+        box-shadow: 0px 0px 20px 5px $second-color;
+        margin: 20px;
+        display: inline;
+        .order_items {
+          font-family: $third-font;
+          font-size: 1.1rem;
+          margin: 20px;
+          border-bottom: 0.5px solid $second-color;
+          .item_name {
+            font-family: $second-font;
+          }
+
+          .item_price {
+            font-family: $second-font;
+          }
+
+          .remove_item {
+            color: $shadow-color;
+            text-decoration: underline;
+            font-size: 0.7rem;
+            cursor: pointer;
+          }
+         
+          &:last-child {
+            display: flex;
+            justify-content: space-between;
+          }
+        }
+      }
+      #order_action {
+        width: 50%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+
+        & > * {
+          @include btn(1.1rem, 30%)
+        }
+      }
+    }//end of order styling
+    
+    #empty_invoice {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+
+      & > h1 {
+        font-family: $first-font;
+      }
     }
 
-  }//end of display styling
+    #invoice {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      min-height: 100%;
+
+      #order_invoice_display{
+          width: 100%;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-evenly;
+          flex-wrap: wrap;
+
+
+         .single_order {
+          border: 2px solid $second-color;
+          border-radius: 10px;
+          width: 20%;
+          margin: 10px;
+          padding: 10px;
+          background-color: $second-color;
+          color: $first-color;
+          height: fit-content;
+
+          & > h5 {
+            text-align: center;
+            font-family: $second-font;
+          }
+
+          .order_details {
+            font-size: 0.8rem;
+            font-family: $third-font;
+
+            & > ul {
+              list-style: none;
+            }
+          }
+
+          .order_price {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            border-top: 1px solid $first-color;
+            font-family: $second-font;
+            padding-top: 5px;
+          }
+         }
+      }
+
+      #full_income {
+        width: 50%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        font-family: $second-font;
+        border: 0px solid $second-color ;
+        border-width: 3px 3px 0px 3px;
+        padding: 5px;
+      }
+    }// end of invoice styling 
+  } //end of display styling
 }

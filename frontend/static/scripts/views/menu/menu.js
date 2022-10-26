@@ -5,7 +5,7 @@ export default class Menu extends AbstractView {
   constructor(params) {
     super();
     this.setTitle("Cash Register - Menu");
-    this.options = params ;
+    this.options = params;
   }
 
   async getHTML() {
